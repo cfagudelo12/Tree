@@ -8,12 +8,13 @@
  * Controller of the treeApp
  */
 angular.module('treeApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $location) {
     
     $scope.homeView=true;
     $scope.configure=false;
     $scope.editing=false;
     $scope.creating=false;
+    $scope.historial=false;
     
     $scope.newFeatureModel={title:"",description:"",tree:[]};
     
@@ -28,6 +29,7 @@ angular.module('treeApp')
         $scope.configure=false;
         $scope.editing=false;
         $scope.creating=true;
+        $scope.historial=false;
     };
     
     $scope.goToDefault = function(){
@@ -35,6 +37,7 @@ angular.module('treeApp')
         $scope.configure=false;
         $scope.editing=false;
         $scope.creating=false;
+        $scope.historial=false;
     };
     
     $scope.goToEditing = function(){
@@ -42,6 +45,19 @@ angular.module('treeApp')
         $scope.configure=false;
         $scope.editing=true;
         $scope.creating=false;
+        $scope.historial=false;
+    };
+    
+    $scope.goToHistorial = function(){
+        $scope.homeView=false;
+        $scope.configure=false;
+        $scope.editing=false;
+        $scope.creating=false;
+        $scope.historial=true;
+    };
+    
+    $scope.seeVersionHistory = function(index) {
+
     };
     
     $scope.resetForm = function() {

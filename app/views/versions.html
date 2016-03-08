@@ -1,0 +1,25 @@
+<div class="container" ng-controller="MainCtrl">
+    <h2 class="form-title">Version history</h2>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Version</div>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="version in currentFeatureModel.versions">
+                <td>{{version.id}}</td>
+                <td>{{version.date}}</td>
+                <td>{{version.description}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div> 
+</div>
+
