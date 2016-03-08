@@ -8,4 +8,4 @@
  *
  * Main module of the application.
  */
-var app = angular.module('treeApp', [])
+var app = angular.module('treeApp', ['ui.tree'])
