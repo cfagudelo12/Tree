@@ -1,4 +1,3 @@
-'use strict';
 
 /**
  * @ngdoc overview
@@ -8,14 +7,24 @@
  *
  * Main module of the application.
  */
-var app = angular.module('treeApp', ['ui.tree','ngRoute']).config(function($routeProvider) { 
+angular.module('treeApp', ['ui.tree','ngRoute']).config(['$routeProvider', function($routeProvider) { 
     $routeProvider
         .when('/', {
-            templateUrl : 'views/main.html'
+            templateUrl : 'views/main.html',
+            controller: 'MainCtrl'
         })
         .when('/versions', {
-            templateUrl : 'views/versions.html'
+            templateUrl : 'views/versions.html',
+            controller: 'VersionsCtrl'
+        })
+        .when('/editing', {
+            templateUrl : 'views/editing.html',
+            controller: 'EditorCtrl'
+        })
+        .when('/form', {
+            templateUrl : 'views/form.html',
+            controller: 'FormCtrl'
         });
-});
+  }])
 
 
