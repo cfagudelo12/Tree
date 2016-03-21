@@ -3,6 +3,8 @@ angular.module('treeApp')
   
       var featureModels={};
       
+      var users={};
+      
       featureModels.currentFeatureModel={};
       
       featureModels.currentFeatureModelIndex=-1;
