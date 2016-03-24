@@ -1,5 +1,5 @@
 angular.module('treeApp')
-  .controller('FormCtrl', function ($scope, featureModels) {
+  .controller('FormCtrl', function ($scope, factory) {
     
     $scope.newFeatureModel={title:"",description:"",tree:[],versions:[]};
     
@@ -8,11 +8,11 @@ angular.module('treeApp')
         $scope.newFeatureModel.description = "";
     };
     
-    $scope.addFeatureForm = function() {
+    $scope.addFeatureFormController = function() {
         var v = {title:$scope.newFeatureModel.title,description:$scope.newFeatureModel.description,tree:[],versions:[]};
         var sameTitle = false;
-        for (var i = 0; i < featureModels.list.length && !sameTitle; i++) {
-            if($scope.newFeatureModel.title===featureModels.list[i].title){
+        for (var i = 0; i < factory.currentUser.featureModelsList.length && !sameTitle; i++) {
+            if($scope.newFeatureModel.title===factory.currentUser.featureModelsList[i].title){
                 sameTitle=true;
             }
         }
@@ -20,7 +20,7 @@ angular.module('treeApp')
             alert("You cannot use the same title in different feature models");
         }
         else{
-            featureModels.add(v);
+            factory.addFeatureModel(v);
         }
         $scope.resetForm();
     };

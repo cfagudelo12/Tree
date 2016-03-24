@@ -1,33 +1,41 @@
 angular.module('treeApp')
-  .factory('featureModels', function () {
+  .factory('factory', function () {
   
-      var featureModels={};
+      var factory={};
       
-      var users={};
+      factory.users=[];
       
-      featureModels.currentFeatureModel={};
-      
-      featureModels.currentFeatureModelIndex=-1;
-      
-      featureModels.list=[];
-      
-      featureModels.add = function(featureModel) {
-        featureModels.list.push(featureModel);
+      factory.currentUser={};
+
+      factory.addFeatureModel = function(featureModel) {
+        factory.currentUser.featureModelsList.push(featureModel);
       };
       
-      featureModels.select = function(index) {
-        featureModels.currentFeatureModelIndex=index;
-        featureModels.currentFeatureModel=featureModels.list[index];
+      factory.selectFeatureModel = function(index) {
+        factory.currentUser.currentFeatureModelIndex=index;
+        factory.currentUser.currentFeatureModel=factory.currentUser.featureModelsList[index];
       };
       
-      featureModels.remove = function(index) {
-        featureModels.list.splice(index, 1);
+      factory.removeFeatureModel = function(index) {
+        factory.currentUser.featureModelsList.splice(index, 1);
       };
       
-      featureModels.save = function(featureModel, index) {
-          featureModels.list[index] = featureModel;
+      factory.saveFeatureModel = function(featureModel, index) {
+          factory.currentUser.featureModelsList[index] = featureModel;
       };
-    
-      return featureModels;
+      
+      factory.addNewUser = function(user) {
+          factory.users.push(user);
+      };
+      
+      factory.myLogin = function(index) {
+          factory.currentUser=factory.users[index];
+      };
+      
+      factory.myLogout = function() {
+          factory.currentUser={};
+      };
+      
+      return factory;
   });
 

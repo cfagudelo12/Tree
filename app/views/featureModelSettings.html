@@ -1,0 +1,27 @@
+<div class="container">
+   <h3>Contributors</h3>
+    <div style="padding:15px">
+        <label class="col-sm-2 col-sm-2 control-label">Username</label>
+        <div class="col-sm-10">
+            <input type="text" ng-model="newFeatureModel.title">
+        </div>
+        <label class="col-sm-2 col-sm-2 control-label">This user can: </label>
+        <select>
+            <option value="configure">Configure</option>
+            <option value="edit">Edit</option>
+            <option value="administrate">Administrate</option>
+        </select>
+        <button>Grant permission</button>
+    </div>
+    <div class="form-group" style="padding:15px">
+        <label class="col-sm-2 col-sm-2 control-label">Description</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="newFeatureModel.description">
+            <span class="help-block">Describe the content of your new feature model</span>
+        </div>
+    </div>
+    <div style="padding:20px">
+        <button class="btn btn-default" ng-click="resetForm()">Clear</button>
+        <a href="#/main" class="btn btn-default" ng-click="addFeatureFormController()">Submit</a>
+    </div>
+</div>

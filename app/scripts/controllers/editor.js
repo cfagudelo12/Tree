@@ -1,11 +1,11 @@
 angular.module('treeApp')
-  .controller('EditorCtrl', function ($scope, featureModels) {
+  .controller('EditorCtrl', function ($scope, factory) {
     
-    $scope.currentFeatureModel=featureModels.currentFeatureModel;
+    $scope.currentFeatureModel=factory.currentUser.currentFeatureModel;
     
-    $scope.currentFeatureModelIndex=featureModels.currentFeatureModelIndex;
+    $scope.currentFeatureModelIndex=factory.currentUser.currentFeatureModelIndex;
     
-    $scope.featureModels = featureModels.list;
+    $scope.featureModels = factory.currentUser.featureModelsList;
     
     $scope.version = {};
     
@@ -30,7 +30,7 @@ angular.module('treeApp')
     $scope.saveFeatureModel = function() {
         var v = {summary:$scope.version.summary,description:$scope.version.description,date:$scope.version.date};
         $scope.currentFeatureModel.versions.push(v);
-        featureModels.save($scope.currentFeatureModel, $scope.currentFeatureModelIndex);
+        factory.saveFeatureModel($scope.currentFeatureModel, $scope.currentFeatureModelIndex);
     };
   });
 

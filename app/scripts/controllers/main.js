@@ -1,13 +1,13 @@
 angular.module('treeApp')
-  .controller('MainCtrl', function ($scope, featureModels) {
+  .controller('MainCtrl', function ($scope, factory) {
     
-    $scope.featureModels = featureModels.list;
+    $scope.featureModels = factory.currentUser.featureModelsList;
     
     $scope.removeFeatureModel = function (index) {
-        featureModels.remove(index);
+        factory.removeFeatureModel(index);
     };
     
     $scope.selectFeatureModel = function (index) {
-        featureModels.select(index);
+        factory.selectFeatureModel(index);
     };
   });

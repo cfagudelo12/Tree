@@ -1,15 +1,10 @@
-
-/**
- * @ngdoc overview
- * @name treeApp
- * @description
- * # treeApp
- *
- * Main module of the application.
- */
 angular.module('treeApp', ['ui.tree','ngRoute']).config(['$routeProvider', function($routeProvider) { 
     $routeProvider
         .when('/', {
+            templateUrl : 'views/signup-login.html',
+            controller: 'Signup-LoginCtrl'
+        })
+        .when('/main', {
             templateUrl : 'views/main.html',
             controller: 'MainCtrl'
         })
