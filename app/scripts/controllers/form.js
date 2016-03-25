@@ -9,7 +9,7 @@ angular.module('treeApp')
     };
     
     $scope.addFeatureFormController = function() {
-        var v = {title:$scope.newFeatureModel.title,description:$scope.newFeatureModel.description,tree:[],versions:[]};
+        var v = {title:$scope.newFeatureModel.title,description:$scope.newFeatureModel.description,tree:[],versions:[],contributors:[],author:factory.currentUser.username};
         var sameTitle = false;
         for (var i = 0; i < factory.currentUser.featureModelsList.length && !sameTitle; i++) {
             if($scope.newFeatureModel.title===factory.currentUser.featureModelsList[i].title){

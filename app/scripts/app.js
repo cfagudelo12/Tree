@@ -1,8 +1,10 @@
 angular.module('treeApp', ['ui.tree','ngRoute']).config(['$routeProvider', function($routeProvider) { 
     $routeProvider
         .when('/', {
-            templateUrl : 'views/signup-login.html',
-            controller: 'Signup-LoginCtrl'
+            //templateUrl : 'views/signup-login.html',
+            templateUrl : 'views/featureModelSettings.html',
+            controller: 'featureModelSettingsCtrl'
+            //controller: 'Signup-LoginCtrl'
         })
         .when('/main', {
             templateUrl : 'views/main.html',
@@ -19,7 +21,11 @@ angular.module('treeApp', ['ui.tree','ngRoute']).config(['$routeProvider', funct
         .when('/form', {
             templateUrl : 'views/form.html',
             controller: 'FormCtrl'
+        })
+        .when('/featureModelSettings', {
+            templateUrl : 'views/featureModelSettings.html',
+            controller: 'featureModelSettingsCtrl'
         });
-  }])
+  }]);
 
 
