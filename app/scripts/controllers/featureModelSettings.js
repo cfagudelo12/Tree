@@ -8,6 +8,8 @@ angular.module('treeApp')
       
       $scope.username="";
       
+      $scope.permissionSelect={};
+      
       $scope.title="";
       
       $scope.description="";
@@ -26,6 +28,17 @@ angular.module('treeApp')
       
       $scope.removeContributor = function(index) {
           
+      };
+      
+      $scope.addContributor = function() {
+          alert($scope.permission);
+          var userTemp = $scope.username;
+          $scope.username = "";
+          for (var i = 0; i < factory.users.length; i++) {
+              if(userTemp===factory.users[i].username) {
+                  var permission={featureModel:factory.currentUser.currentFeatureModel,permission:$scope.permission};
+              }   
+          }
       };
       
       $scope.goToAddingContributor = function() {
