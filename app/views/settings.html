@@ -50,7 +50,7 @@
                 </div>
             </div>
         </form>
-        <a href="#/main" class="btn btn-default" ng-disabled="!changed&&(title===''||description==='')" ng-click="saveFeatureModel()">Save changes</a>
-        <a href="#/main" class="btn btn-danger" ng-click="removeFeatureModel()">Delete this feature model</a>
+        <a ui-sref="home" class="btn btn-default" ng-disabled="!changed&&(title===''||description==='')" ng-click="saveFeatureModel()">Save changes</a>
+        <a ui-sref="signup-login" class="btn btn-danger" ng-click="removeFeatureModel()">Delete this feature model</a>
     </div>
 </div>

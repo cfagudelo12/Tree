@@ -6,13 +6,13 @@
                     {{featureModel.title}}
                 </label>
                 <span class="input-group-btn" style="display:inline-block;">
-                    <a href="#/" class="btn btn-default" ng-click="" aria-label="Configure">Configure</a>
-                    <a href="#/editing" class="btn btn-default" ng-click="selectFeatureModel($index)">Edit</a>
-                    <a href="#/versions" class="btn btn-default" ng-click="selectFeatureModel($index)">Versions</a>
-                    <a href="#/featureModelSettings" class="btn btn-default" ng-click="selectFeatureModel($index)">Settings</a>
+                    <a ui-sref="home" class="btn btn-default" ng-click="" aria-label="Configure">Configure</a>
+                    <a ui-sref="editing" class="btn btn-default" ng-click="selectFeatureModel($index)">Edit</a>
+                    <a ui-sref="versioning" class="btn btn-default" ng-click="selectFeatureModel($index)">Versions</a>
+                    <a ui-sref="setting" class="btn btn-default" ng-click="selectFeatureModel($index)">Settings</a>
                 </span>
             </div>
-        <a href="#/form" class="btn btn-default">Create</a>
+        <a ui-sref="creating" class="btn btn-default">Create</a>
     </div>
     <div style="width:45%; float:right;">
         <h2>Shared feature models</h2>
@@ -21,8 +21,8 @@
                 {{eFeatureModel}}
             </label>
             <span class="input-group-btn" style="display:inline-block;">
-                <a href="#/" class="btn btn-default" ng-click="" aria-label="Configure">Configure</a>
-                <a href="#/editing" class="btn btn-default" ng-click="editFeatureModel($index)">Edit</a>
+                <a ui-sref="home" class="btn btn-default" ng-click="" aria-label="Configure">Configure</a>
+                <a ui-sref="editing" class="btn btn-default" ng-click="editFeatureModel($index)">Edit</a>
             </span>
         </div>
     </div>
