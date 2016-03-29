@@ -21,14 +21,16 @@
             <input type="text" placeholder="Username" ng-model="username">
             <label style="padding:15px">This user can</label>
             <select name="permissionSelect" id="permissionSelect" ng-model="permissionSelect">
-                <option value="">Please select an option</option>
                 <option value="configure">Configure</option>
                 <option value="edit">Edit</option>
                 <option value="administrate">Administrate</option>
             </select>
             <br>
-            <button class="btn btn-default" ng-click="addContributor()">Grant permission</button>
+            <button class="btn btn-default" ng-disabled="permissionSelect===''" ng-click="addContributor()">Grant permission</button>
             <button class="btn btn-default" ng-click="goBack()">Cancel</button>
+            <div style="padding:10px;width:50%;" class="warning" ng-show="addingContributorError">
+                <span ng-show="addingContributorError">{{addingContributorErrorMessage}}</span>
+            </div>
         </div>
     </div>
     <div>
@@ -48,7 +50,7 @@
                 </div>
             </div>
         </form>
-        <button class="btn btn-default">Save changes</button>
-        <button class="btn btn-danger">Delete</button>
+        <a href="#/main" class="btn btn-default" ng-disabled="!changed&&(title===''||description==='')" ng-click="saveFeatureModel()">Save changes</a>
+        <a href="#/main" class="btn btn-danger" ng-click="removeFeatureModel()">Delete this feature model</a>
     </div>
 </div>
