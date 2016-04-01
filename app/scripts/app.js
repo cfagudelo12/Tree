@@ -1,4 +1,4 @@
-angular.module('treeApp', ['ui.tree','ui.router']).config(function($stateProvider, $urlRouterProvider) { 
+angular.module('treeApp', ['ui.tree','ui.router','firebase']).config(function($stateProvider, $urlRouterProvider) { 
     $urlRouterProvider.otherwise("/");
     $stateProvider
     .state('home', {
