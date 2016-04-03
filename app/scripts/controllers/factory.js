@@ -1,25 +1,42 @@
 angular.module('treeApp')
-  .factory('factory', function ($firebaseObject) {
+  .factory('factory', function ($firebaseObject, $firebaseArray) {
   
       var factory={};
       
-      factory.users={};
-      
-      var ref=new Firebase("https://tree-mockup.firebaseio.com");
+      var baseRef="https://tree-mockup.firebaseio.com";
       
       factory.loginUser = function(uid) {
           factory.currentUser = uid;
+          var featureModelsRef = new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels");
+          factory.featureModels = $firebaseArray(featureModelsRef);
       };
       
       factory.createUser = function(uid) {
-          var profileRef = ref.child(uid);
-          var newUser=$firebaseObject(profileRef);
+          var ref = new Firebase(baseRef+"/users");
+          var userRef = ref.child(uid);
+          var newUser=$firebaseObject(userRef);
           newUser.uid=uid;
           newUser.$save();
       };
 
-      factory.addFeatureModel = function(featureModel) {
-        factory.currentUser.featureModelsList.push(featureModel);
+      factory.addFeatureModel = function(title, description) {
+          var sameTitle = false;
+          factory.featureModels.$loaded()
+            .then(function(){
+                for(var i=0; i<factory.featureModels.length&&!sameTitle; i++) {
+                    if(title===factory.featureModels[i].title) {
+                        sameTitle=true;
+                        alert("You cannot have 2 feature models with the same title.");
+                    }
+                }
+                if(!sameTitle) {
+                  factory.featureModels.$add({
+                    title:title,
+                    description:description,
+                    author:factory.currentUser
+                  });
+                }
+            });
       };
       
       factory.selectFeatureModel = function(index) {
@@ -33,10 +50,6 @@ angular.module('treeApp')
       
       factory.saveFeatureModel = function(featureModel, index) {
           factory.currentUser.featureModelsList[index] = featureModel;
-      };
-      
-      factory.myLogin = function(index) {
-          factory.currentUser=factory.users[index];
       };
       
       factory.myLogout = function() {
