@@ -1,17 +1,13 @@
 angular.module('treeApp')
   .controller('EditorCtrl', function ($scope, factory) {
     
-    $scope.currentFeatureModel=factory.currentUser.currentFeatureModel;
+    $scope.summary=null;
     
-    $scope.currentFeatureModelIndex=factory.currentUser.currentFeatureModelIndex;
+    $scope.description=null;
     
-    $scope.featureModels = factory.currentUser.featureModelsList;
+    $scope.date=null;
     
-    $scope.version = {};
-    
-    $scope.version.summary = "";
-    
-    $scope.version.description = "";
+    $scope.featureModel=factory.featureModel;
    
     var today = new Date();
     var dd = today.getDate();
@@ -25,12 +21,11 @@ angular.module('treeApp')
     } 
     today = dd+'/'+mm+'/'+yyyy;
 
-    $scope.version.date = today;
+    $scope.date = today;
     
     $scope.saveFeatureModel = function() {
-        var v = {summary:$scope.version.summary,description:$scope.version.description,date:$scope.version.date};
-        $scope.currentFeatureModel.versions.push(v);
-        factory.saveFeatureModel($scope.currentFeatureModel, $scope.currentFeatureModelIndex);
+        factory.saveFeatureModel();
+        factory.saveFeatureModelVersion($scope.summary,$scope.description,$scope.date);
     };
   });
 

@@ -39,21 +39,27 @@ angular.module('treeApp')
             });
       };
       
-      factory.selectFeatureModel = function(index) {
-        factory.currentUser.currentFeatureModelIndex=index;
-        factory.currentUser.currentFeatureModel=factory.currentUser.featureModelsList[index];
+      factory.selectFeatureModel = function(id) {
+        var featureModelRef=new Firebase(baseRef);
+        factory.featureModel=$firebaseObject(featureModelRef.child('users').child(factory.currentUser).child('featureModels').child(id));
       };
       
-      factory.removeFeatureModel = function(index) {
-        factory.currentUser.featureModelsList.splice(index, 1);
+      factory.removeFeatureModel = function(id) {
+        factory.featureModels.$remove(id);
       };
       
-      factory.saveFeatureModel = function(featureModel, index) {
-          factory.currentUser.featureModelsList[index] = featureModel;
+      factory.saveFeatureModel = function() {
+          factory.featureModel.$save;
       };
       
-      factory.myLogout = function() {
-          factory.currentUser={};
+      factory.saveFeatureModelVersion = function(summary, description, date) {
+          var versionsRef=new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels/"+factory.featureModel.$id+"/versions");
+          var versions=$firebaseArray(versionsRef);
+          versions.$add({
+              summary:summary,
+              description:description,
+              date:date
+          });
       };
       
       return factory;
