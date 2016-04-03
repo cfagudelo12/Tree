@@ -1,94 +1,88 @@
 angular.module('treeApp')
-  .controller('Signup-LoginCtrl', function ($scope, $location, factory) {
+  .controller('Signup-LoginCtrl', function ($scope, $location, authentication) {
       $scope.signup = false;
-      
-      $scope.signupError = false;
-      
-      $scope.signupErrorMessage = "";
-      
-      $scope.signupRegister = true;
-      
-      $scope.signupCancel = true;
       
       $scope.login = true;
       
-      $scope.loginError = false;
-      
-      $scope.loginErrorMessage = "";
-      
-      $scope.loginSubmit = true;
-      
-      $scope.loginCreateAccount = true;
-      
-      $scope.newUser = {};
-      
-      $scope.loginAttemp = {};
-      
       $scope.goToSignup = function() {
-          $scope.loginAttemp = {};
+          $scope.error = false;
+          $scope.errorMessage = null;
           $scope.login = false;
           $scope.signup = true;
-          $scope.signupError = false;
-          $scope.signupErrorMessage = "";
-          $scope.loginError = false;
-          $scope.loginErrorMessage = "";
       };
       
       $scope.goToLogin = function() {
-          $scope.newUser = {};
+          $scope.error = false;
+          $scope.errorMessage = null;
           $scope.login = true;
           $scope.signup = false;
-          $scope.signupError = false;
-          $scope.signupErrorMessage = "";
-          $scope.loginError = false;
-          $scope.loginErrorMessage = "";
       };
       
-      $scope.createUser = function() {
-            var ref = new Firebase("https://sweltering-heat-2690.firebaseio.com");
-            $scope.signupRegister = false;
-            $scope.signupCancel = false;
-            ref.createUser({
-                email: $scope.newUser.email,
-                password: $scope.newUser.password,
-                featureModels: [],
-                teamFeatureModels: [],
-                currentFeatureModel: {},
-                currentFeatureModelIndex: -1
-            }, function (error, userData) {
-                if (error) {
-                    $scope.signupRegister = true;
-                    $scope.signupCancel = true;
-                    $scope.signupError = true;
-                    $scope.signupErrorMessage = error;
-                } else {
-                    $scope.signupRegister = true;
-                    $scope.signupCancel = true;
-                    $scope.goToLogin();
-                }
+        $scope.createUser = function() {
+            authentication.$createUser({
+                email: $scope.email,
+                password: $scope.password
+            }).then(function(userData) {
+                $scope.email=null;
+                $scope.password=null;
+                $scope.passwordConfirmation=null;
+                $scope.goToLogin();
+            }).catch(function(error) {
+                $scope.error = true;
+                $scope.errorMessage = $scope.handleError(error);
             });
+        };
+      
+    // $scope.createUser = function() {
+    //      var ref = new Firebase("https://sweltering-heat-2690.firebaseio.com");
+        // ref.createUser({
+      // /       email: $scope.newUser.email,
+       //       password: $scope.newUser.password,
+        //      featureModels: [],
+         //     teamFeatureModels: [],
+          //    currentFeatureModel: {},
+           //   currentFeatureModelIndex: -1
+      //    }).then(function () {
+      //        alert("Prim");
+      //    }).then(function(authData){
+      //       alert("AuthData");
+       //   }).catch(function(error) {
+      //        alert("Error");
+      //        $scope.signupError = true;
+      //        $scope.signupErrorMessage = error;
+      //    });
+     // };
+              
+      $scope.loginUser = function() {
+        $scope.authData = null;
+        authentication.$authWithPassword({
+            email: $scope.email,
+            password: $scope.password
+        }).then(function(authData) {
+            $location.path('/home');
+        }).catch(function(error) {
+            $scope.error = true;
+            $scope.errorMessage = $scope.handleError(error);
+        });
       };
       
-      $scope.myLogin = function() {
-          $scope.loginSubmit = true;
-          $scope.loginCreateAccount = true;
-          var ref = new Firebase("https://sweltering-heat-2690.firebaseio.com");
-          ref.authWithPassword({
-              email: $scope.loginAttemp.email,
-              password: $scope.loginAttemp.password
-          }, function(error, authData) {
-          if (error) {
-              $scope.loginSubmit = true;
-              $scope.loginCreateAccount = true;
-              $scope.loginError=true;
-              $scope.loginErrorMessage=error;
-          } else {
-              alert("Entra");
-              $scope.loginSubmit = true;
-              $scope.loginCreateAccount = true;
-              $location.path('/home');
+      $scope.handleError = function(error) {
+          switch (error.code) {
+              case "INVALID_EMAIL":
+                  return "The specified user account email is invalid.";
+              break;
+              case "INVALID_PASSWORD":
+                  return "The specified user account password is incorrect.";
+              break;
+              case "EMAIL_TAKEN":
+                  return "The specified email address is already in use.";
+              break;
+              case "INVALID_EMAIL":
+                  return "The specified email address is invalid.";
+              break;
+              default:
+                  return error;
           }
-        });     
       };
   });
 

@@ -1,31 +1,31 @@
 <div class="container">
     <div ng-show="signup">
         <h1>Join FaMoSa</h1>
-        <form name="signupForm" ng-submit="createUser()" class="simple-form">
+        <form name="signupForm" class="simple-form">
             <div class="form-group" style="padding:20px">
                 <div class="col-sm-10">
-                    <input name="email" ng-minlength="5" required type="text" class="form-control" placeholder="Your email address" ng-model="newUser.email">
+                    <input name="email" ng-minlength="5" required type="text" class="form-control" placeholder="Your email address" ng-model="email">
                 </div>
             </div>
             <div class="form-group" style="padding:20px">
                 <div class="col-sm-10">
-                    <input name="password" ng-minlength="5" required type="password" class="form-control" placeholder="Create a password" ng-model="newUser.password">
+                    <input name="password" ng-minlength="5" required type="password" class="form-control" placeholder="Create a password" ng-model="password">
                 </div>
             </div>
             <div class="form-group" style="padding:20px">
                 <div class="col-sm-10">
-                    <input name="passwordConfirmation" ng-minlength="5" required type="password" class="form-control" placeholder="Confirm password" ng-model="newUser.passwordConfirmation">
+                    <input name="passwordConfirmation" ng-minlength="5" required type="password" class="form-control" placeholder="Confirm password" ng-model="passwordConfirmation">
                 </div>
             </div>
             <br>
-            <div style="padding:10px;width:50%;" class="warning" ng-show="signupForm.email.$error.required||signupForm.password.$error.required||signupForm.passwordConfirmation.$error.required||signupForm.password.$viewValue!==signupForm.passwordConfirmation.$viewValue||signupError">
+            <div style="padding:10px;width:50%;" class="warning" ng-show="signupForm.email.$error.required||signupForm.password.$error.required||signupForm.passwordConfirmation.$error.required||signupForm.password.$viewValue!==signupForm.passwordConfirmation.$viewValue||error">
                 <span ng-show="signupForm.email.$error.required||signupForm.password.$error.required||signupForm.passwordConfirmation.$error.required">There is an empty required field. Please provide your information</span>
                 <span ng-show="!signupForm.password.$error.required&&!signupForm.passwordConfirmation.$error.required&&signupForm.password.$viewValue!==signupForm.passwordConfirmation.$viewValue">The passwords do not match</span>
-                <span ng-show="signupError">{{signupErrorMessage}}</span>
+                <span ng-show="error">{{errorMessage}}</span>
             </div>
             <div class="form-group" style="padding:20px 35px" >
-                <button type="submit" ng-disabled="signupForm.$invalid||signupForm.password.$viewValue!==signupForm.passwordConfirmation.$viewValue||!signupRegister" class="btn btn-primary">Register</button>
-                <button class="btn btn-default" ng-disabled="!signupCancel" ng-click="goToLogin()">Cancel</button>
+                <button class="btn btn-default" ng-click="createUser()" ng-disabled="signupForm.$invalid||signupForm.password.$viewValue!==signupForm.passwordConfirmation.$viewValue">Register</button>
+                <button class="btn btn-default" ng-click="goToLogin()">Cancel</button>
             </div>
         </form>  
     </div>
@@ -35,21 +35,21 @@
             <form  novalidate class="simple-form">
             <div class="form-group" style="padding:20px">
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Email" ng-model="loginAttemp.email">
+                    <input type="text" class="form-control" placeholder="Email" ng-model="email">
                 </div>
             </div>
             <div class="form-group" style="padding:20px">
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" placeholder="Password" ng-model="loginAttemp.password">
+                    <input type="password" class="form-control" placeholder="Password" ng-model="password">
                 </div>
             </div>
             <div class="form-group" style="padding:20px 35px">
-                <button class="btn btn-default" ng-disabled="!loginSubmit" ng-click="myLogin()">Login</button>
-                <button class="btn btn-default" ng-disabled="!loginCreateAccount" ng-click="goToSignup()">Create an account</button>
+                <button class="btn btn-default" ng-click="loginUser()">Login</button>
+                <button class="btn btn-default" ng-click="goToSignup()">Create an account</button>
             </div>
             </form>
-            <div style="padding:10px;width:50%;" class="warning" ng-show="loginError">
-                <span ng-show="loginError">{{loginErrorMessage}}</span>
+            <div style="padding:10px;width:50%;" class="warning" ng-show="error">
+                <span ng-show="error">{{errorMessage}}</span>
             </div>
         </div>    
     </div>
