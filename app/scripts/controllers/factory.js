@@ -1,11 +1,22 @@
 angular.module('treeApp')
-  .factory('factory', function () {
+  .factory('factory', function ($firebaseObject) {
   
       var factory={};
       
-      factory.users=[];
+      factory.users={};
       
-      factory.currentUser={};
+      var ref=new Firebase("https://tree-mockup.firebaseio.com");
+      
+      factory.loginUser = function(uid) {
+          factory.currentUser = uid;
+      };
+      
+      factory.createUser = function(uid) {
+          var profileRef = ref.child(uid);
+          var newUser=$firebaseObject(profileRef);
+          newUser.uid=uid;
+          newUser.$save();
+      };
 
       factory.addFeatureModel = function(featureModel) {
         factory.currentUser.featureModelsList.push(featureModel);
@@ -22,10 +33,6 @@ angular.module('treeApp')
       
       factory.saveFeatureModel = function(featureModel, index) {
           factory.currentUser.featureModelsList[index] = featureModel;
-      };
-      
-      factory.addNewUser = function(user) {
-          factory.users.push(user);
       };
       
       factory.myLogin = function(index) {

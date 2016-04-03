@@ -1,6 +1,6 @@
-angular.module('treeApp').factory('authentication', ["$firebaseAuth",
+angular.module('treeApp').factory('authentication', ['$firebaseAuth',
   function($firebaseAuth) {
-    var ref = new Firebase("https://sweltering-heat-2690.firebaseio.com");
+    var ref=new Firebase("https://tree-mockup.firebaseio.com");
     return $firebaseAuth(ref);
   }
 ]);
