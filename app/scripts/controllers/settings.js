@@ -2,9 +2,7 @@ angular.module('treeApp')
   .controller('featureModelSettingsCtrl', function ($scope, factory) {
       $scope.addingContributor=false;
       
-      $scope.currentFeatureModel=factory.currentUser.currentFeatureModel;
-    
-      $scope.currentFeatureModelIndex=factory.currentUser.currentFeatureModelIndex;
+      $scope.featureModel=factory.featureModel;
       
       $scope.username="";
       
@@ -21,13 +19,13 @@ angular.module('treeApp')
       $scope.changed=false;
 
       $scope.removeFeatureModel = function() {
-          factory.removeFeatureModel(factory.currentUser.currentFeatureModelIndex);
+          factory.removeFeatureModel($scope.featureModel.$id);
       };
         
       $scope.saveFeatureModel = function() {
-          $scope.currentFeatureModel.title=$scope.title;
-          $scope.currentFeatureModel.description=$scope.description;
-          factory.saveFeatureModel($scope.currentFeatureModel, $scope.currentFeatureModelIndex);
+          $scope.featureModel.title=$scope.title;
+          $scope.featureModel.description=$scope.description;
+          factory.saveFeatureModel();
       };
       
       $scope.removeContributor = function(index) {
