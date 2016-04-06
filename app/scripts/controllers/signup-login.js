@@ -27,7 +27,7 @@ angular.module('treeApp')
               email: $scope.email,
               password: $scope.password
           }).then(function(userData) {
-              factory.createUser(userData.uid);
+              factory.createUser(userData.uid, $scope.email);
               $scope.email=null;
               $scope.password=null;
               $scope.passwordConfirmation=null;

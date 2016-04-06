@@ -3,6 +3,6 @@ angular.module('treeApp')
     $scope.featureModels = factory.featureModels;
     
     $scope.selectFeatureModel = function (index) {
-        factory.selectFeatureModel($scope.featureModels[index].$id);
+        factory.selectFeatureModel(index);
     };
   });

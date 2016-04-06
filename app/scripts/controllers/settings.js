@@ -4,7 +4,7 @@ angular.module('treeApp')
       
       $scope.featureModel=factory.featureModel;
       
-      $scope.username="";
+      $scope.user="";
       
       $scope.permissionSelect="";
       
@@ -15,11 +15,9 @@ angular.module('treeApp')
       $scope.addingContributorError=false;
       
       $scope.addingContributorErrorMessage="";
-      
-      $scope.changed=false;
 
       $scope.removeFeatureModel = function() {
-          factory.removeFeatureModel($scope.featureModel.$id);
+          factory.removeFeatureModel();
       };
         
       $scope.saveFeatureModel = function() {
@@ -29,44 +27,43 @@ angular.module('treeApp')
       };
       
       $scope.removeContributor = function(index) {
-          factory.currentUser.currentFeatureModel.contributors.splice(index, 1);
-          $scope.changed=true;
+          factory.removeContributor(index);
       };
       
       $scope.addContributor = function() {
-          var userTemp = $scope.username;
           var encontrado = false;
-          $scope.username = "";
-          for (var i = 0; i < factory.currentUser.currentFeatureModel.contributors.length && !encontrado; i++) {
-              if(userTemp===factory.currentUser.currentFeatureModel.contributors.user.username) {
-                  encontrado=true;
-                  $scope.addingContributorErrorMessage="Contributor already added";
-              }   
-          }
-          for (var i = 0; i < factory.users.length && !encontrado; i++) {
-              if(userTemp===factory.users[i].username) {
-                  encontrado=true;
-                  $scope.addingContributor=false;
-                  $scope.addingContributorError=false;
-                  $scope.addingContributorErrorMessage="";
-                  var permission={featureModel:factory.currentUser.currentFeatureModel,permission:$scope.permission};
-                  var permission2={user:factory.users[i],permission:$scope.permission};
-                  factory.users[i].teamFeatureModelsList.push(permission);
-                  factory.currentUser.currentFeatureModel.contributors.push(permission2);
-                  $scope.changed=true;
-              }   
-          }
-          if(!encontrado) {
-              $scope.addingContributorError=true;
-              $scope.addingContributorErrorMessage="Username not found";
-          }
+          var contributors = factory.getContributors();
+          contributors.$loaded().then(function(){
+              for (var i = 0; i < contributors.length && !encontrado; i++) {
+                  if($scope.user===contributors[i].user) {
+                      encontrado=true;
+                      $scope.addingContributorError=true;
+                      $scope.addingContributorErrorMessage="Contributor already added";
+                  }
+              }
+              if(!encontrado) {
+                  var temp = factory.addContributor($scope.user, $scope.permissionSelect);
+                  temp.then(function(result){
+                      if(result!==null) {
+                          $scope.addingContributorError=true;
+                          $scope.addingContributorErrorMessage=result;
+                      }
+                      else {
+                          $scope.goBack();
+                      }
+                  });       
+              }
+              $scope.user = "";
+          });
       };
       
       $scope.goToAddingContributor = function() {
           $scope.addingContributor=true;
+          $scope.addingContributorError=false;
       };
       
       $scope.goBack = function() {
+          $scope.addingContributorError=false;
           $scope.username="";
           $scope.addingContributor=false;
       };

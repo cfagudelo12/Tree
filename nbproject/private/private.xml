@@ -5,7 +5,7 @@
             <url>app/scripts/controllers/factory.js</url>
             <bookmark id="1">
                 <name/>
-                <line>47</line>
+                <line>66</line>
                 <key/>
             </bookmark>
         </file>
@@ -28,15 +28,15 @@
             <file>file:/D:/Carlos%20Agudelo/Documents/GitHub/tree/Tree/app/styles/main.css</file>
         </group>
         <group name="yammz">
+            <file>file:/D:/Documents/GitHub/Tree/app/views/settings.html</file>
+            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/settings.js</file>
             <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/main.js</file>
             <file>file:/D:/Documents/GitHub/Tree/app/views/home.html</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/signup-login.js</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/authentication.js</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/index.html</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/views/signup-login.html</file>
+            <file>file:/D:/Documents/GitHub/Tree/app/views/editing.html</file>
+            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/editor.js</file>
+            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/versions.js</file>
             <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/factory.js</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/form.js</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/scripts/app.js</file>
+            <file>file:/D:/Documents/GitHub/Tree/app/views/versions.html</file>
         </group>
     </open-files>
 </project-private>

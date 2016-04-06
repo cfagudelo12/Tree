@@ -2,9 +2,17 @@
     <div>
         <div ng-hide="addingContributor">
             <h1>Contributors</h1>
-            <div ng-repeat="contributor in currentFeatureModel.contributors" style="padding:5px 10px; vertical-align: middle;">
+            <div style="padding:5px 10px; vertical-align: middle;">
                 <label style="width: 200px; display:inline-block;">
-                    {{contributor.user.username}}
+                    User
+                </label>
+                <label style="width: 200px; display:inline-block;">
+                    Permission
+                </label>
+            </div>
+            <div ng-repeat="contributor in featureModel.contributors" style="padding:5px 10px; vertical-align: middle;">
+                <label style="width: 200px; display:inline-block;">
+                    {{contributor.user}}
                 </label>
                 <label style="width: 200px; display:inline-block;">
                     {{contributor.permission}}
@@ -18,7 +26,7 @@
         <div ng-show="addingContributor">
             <h1>Add new contributor</h1>
             <label>Username</label>
-            <input type="text" placeholder="Username" ng-model="username">
+            <input type="text" placeholder="Username" ng-model="user">
             <label style="padding:15px">This user can</label>
             <select name="permissionSelect" id="permissionSelect" ng-model="permissionSelect">
                 <option value="configure">Configure</option>
@@ -50,7 +58,8 @@
                 </div>
             </div>
         </form>
-        <a ui-sref="home" class="btn btn-default" ng-disabled="!changed&&(title===''||description==='')" ng-click="saveFeatureModel()">Save changes</a>
+        <a ui-sref="home" class="btn btn-default" ng-disabled="(title===''||description==='')" ng-click="saveFeatureModel()">Save changes</a>
         <a ui-sref="home" class="btn btn-danger" ng-click="removeFeatureModel()">Delete this feature model</a>
+        <a ui-sref="home" class="btn btn-default">Back</a>
     </div>
 </div>

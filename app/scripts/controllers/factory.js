@@ -11,11 +11,12 @@ angular.module('treeApp')
           factory.featureModels = $firebaseArray(featureModelsRef);
       };
       
-      factory.createUser = function(uid) {
+      factory.createUser = function(uid, user) {
           var ref = new Firebase(baseRef+"/users");
           var userRef = ref.child(uid);
           var newUser=$firebaseObject(userRef);
           newUser.uid=uid;
+          newUser.user=user;
           newUser.$save();
       };
 
@@ -39,17 +40,18 @@ angular.module('treeApp')
             });
       };
       
-      factory.selectFeatureModel = function(id) {
-        var featureModelRef=new Firebase(baseRef);
-        factory.featureModel=$firebaseObject(featureModelRef.child('users').child(factory.currentUser).child('featureModels').child(id));
+      factory.selectFeatureModel = function(index) {
+        factory.featureModelIndex=index;
+        factory.featureModel=factory.featureModels[index];
       };
       
-      factory.removeFeatureModel = function(id) {
-        factory.featureModels.$remove(id);
+      factory.removeFeatureModel = function() {
+        factory.featureModels.$remove(factory.featureModelIndex);
       };
       
       factory.saveFeatureModel = function() {
-          factory.featureModel.$save;
+          factory.featureModels[factory.featureModelIndex]=factory.featureModel;
+          factory.featureModels.$save(factory.featureModelIndex);
       };
       
       factory.saveFeatureModelVersion = function(summary, description, date) {
@@ -60,6 +62,49 @@ angular.module('treeApp')
               description:description,
               date:date
           });
+      };
+      
+      factory.getContributors = function() {
+          var contributorsRef=new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels/"+factory.featureModel.$id+"/contributors");
+          var contributors=$firebaseArray(contributorsRef);
+          return contributors;
+      };
+      
+      factory.addContributor = function(user, permission) {
+          var usersRef = new Firebase(baseRef+"/users");
+          var users = $firebaseArray(usersRef);
+          var contributorsRef=new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels/"+factory.featureModel.$id+"/contributors");
+          var contributors=$firebaseArray(contributorsRef);
+          var promise = users.$loaded().then(function() {
+              var result=null;
+              var encontrado=false;
+              for (var i = 0; i < users.length && !encontrado; i++) {
+                  if(user===users[i].user&&users[i].uid!==factory.currentUser) {
+                      encontrado=true;
+                      contributors.$add({
+                          uid:users[i].uid,
+                          user:user,
+                          permission:permission
+                      });
+                  }   
+              }
+              if(!encontrado) {
+                  result="User not found";
+              }
+              else {
+                  result=null;
+              }
+              return result;
+          });
+          return promise;
+      };
+      
+      factory.removeContributor = function(index) {
+          var contributorsRef=new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels/"+factory.featureModel.$id+"/contributors");
+          var contributors=$firebaseArray(contributorsRef);
+          contributors.$loaded().then(function(){
+              contributors.$remove(index);
+          });        
       };
       
       return factory;
