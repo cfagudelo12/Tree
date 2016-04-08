@@ -7,23 +7,19 @@
             <button class="btn btn-default" ng-click="">OR Group</button>
             <button class="btn btn-default" ng-click="">XOR Group</button>
         </div>
-        <div ui-tree>
-            <ol ui-tree-nodes="" ng-model="currentFeatureModel.tree">
-                <li ng-repeat="node in currentFeatureModel.tree" ui-tree-node>
-                    <div ui-tree-handle>
-                        {{node.title}}
-                    </div>
-                    <ol ui-tree-nodes="" ng-model="node.tree">
-                        <li ng-repeat="subItem in node.tree" ui-tree-node>
-                            <div ui-tree-handle>
-                                {{subItem.title}}
-                            </div>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-6">
+            <div ui-tree id="tree-root" class="angular-ui-tree">
+                <ol ui-tree-nodes ng-model="data" class="ng-pristine ng-untouched ng-valid angular-ui-tree-nodes">
+                    <li ng-repeat="node in data" ui-tree-node ng-include="'views/nodes_renderer.html'" class="angular-ui-tree-node" collapsed="false">      
+                    </li>
+                </ol>
+            </div>
         </div>
     </div>
+     
     <form  novalidate class="simple-form">
         <div class="form-group">
             <label class="col-sm-2 col-sm-2 control-label">Summary</label>
