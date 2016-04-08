@@ -28,15 +28,11 @@
             <file>file:/D:/Carlos%20Agudelo/Documents/GitHub/tree/Tree/app/styles/main.css</file>
         </group>
         <group name="yammz">
-            <file>file:/D:/Documents/GitHub/Tree/app/views/settings.html</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/settings.js</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/main.js</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/views/home.html</file>
+            <file>file:/D:/Documents/GitHub/Tree/app/views/nodes_renderer.html</file>
             <file>file:/D:/Documents/GitHub/Tree/app/views/editing.html</file>
             <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/editor.js</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/versions.js</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/factory.js</file>
-            <file>file:/D:/Documents/GitHub/Tree/app/views/versions.html</file>
+            <file>file:/D:/Documents/GitHub/Tree/app/index.html</file>
+            <file>file:/D:/Documents/GitHub/Tree/app/scripts/app.js</file>
         </group>
     </open-files>
 </project-private>
