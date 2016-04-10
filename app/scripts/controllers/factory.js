@@ -50,6 +50,29 @@ angular.module('treeApp')
         factory.featureModel=factory.featureModels[index];
       };
       
+      factory.getFeatures = function() {
+        var list=[];
+        if(factory.featureModel.tree) {
+            for(var i = 0; i < factory.featureModel.tree.length; i++) {
+                factory.recursion(list, factory.featureModel.tree[i]);
+            }
+        }
+        console.log(list);
+        return list;
+      };
+      
+      factory.recursion = function(list, node) {
+        list.push({
+            'title':node.title,
+            'type':node.type
+        });
+        if(node.nodes) {
+           for(var i = 0; i < node.nodes.length; i++) {
+            factory.recursion(list, node.nodes[i]);
+           } 
+        }
+      };
+     
       factory.removeFeatureModel = function() {
         factory.featureModels.$remove(factory.featureModelIndex);
       };

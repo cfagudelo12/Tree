@@ -10,12 +10,6 @@ angular.module('treeApp')
     $scope.date=null;
     
     $scope.type="";
-    
-    //$scope.remove = function (scope) {
-        //alert("Entra");
-        //console.log(scope);
-        //scope.remove();
-     //};
 
     $scope.addNode = function () {
         if($scope.nodeData.nodes) {
@@ -46,7 +40,9 @@ angular.module('treeApp')
     $scope.featureModel=factory.featureModel;
     
     $scope.tree=factory.featureModel.tree;
-   
+        
+    $scope.features=factory.getFeatures();
+              
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth()+1;

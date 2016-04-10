@@ -11,7 +11,7 @@
                     <img ng-if="node.type == 'Mandatory'" src="images/mandatory.gif" alt="mandatory">
                     <img ng-if="node.type == 'Optional'" src="images/optional.gif" alt="optional">
                     {{node.title}}
-                    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeNode(this)">
+                    <a ng-if="node.type != 'Root Node'" class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeNode(this)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </a>
                     <a class="pull-right btn btn-primary btn-xs" ng-disable="addingNode" data-nodrag ng-click="goToAddingNode(this)" style="margin-right: 8px;">
