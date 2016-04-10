@@ -20,7 +20,7 @@ angular.module('treeApp')
           newUser.$save();
       };
 
-      factory.addFeatureModel = function(title, description) {
+      factory.addFeatureModel = function(title, description, rootTitle) {
           var sameTitle = false;
           factory.featureModels.$loaded()
             .then(function(){
@@ -34,7 +34,12 @@ angular.module('treeApp')
                   factory.featureModels.$add({
                     title:title,
                     description:description,
-                    author:factory.currentUser
+                    author:factory.currentUser,
+                    tree:[{
+                        'title':rootTitle,
+                        'type':"Root Node",
+                        'nodes':[]
+                    }]
                   });
                 }
             });

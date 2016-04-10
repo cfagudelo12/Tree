@@ -1,24 +1,22 @@
 <div class="container">
-    <h2 class="form-title">Editing</h2>
-    <div>
-        <div style="padding:5px 10px; vertical-align: middle;" >
-            <button class="btn btn-default" ng-click="">Mandatory</button>
-            <button class="btn btn-default" ng-click="">Optional</button>
-            <button class="btn btn-default" ng-click="">OR Group</button>
-            <button class="btn btn-default" ng-click="">XOR Group</button>
-        </div>
-    </div>
+    <h2 class="form-title">Editing {{featureModel.title}}</h2>
     
     <div class="row">
         <div class="col-sm-6">
             <script type="text/ng-template" id="nodes_renderer.html">
                 <div ui-tree-handle class="tree-node tree-node-content angular-ui-tree-handle">
-                    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag ng-click="toggle(this)">
-                        <span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}"></span>
+                    <img ng-if="node.type == 'Root Node'" src="images/root.gif" alt="root">
+                    <img ng-if="node.type == 'OR Group'" src="images/OR.gif" alt="OR">
+                    <img ng-if="node.type == 'XOR Group'" src="images/XOR.gif" alt="XOR">
+                    <img ng-if="node.type == 'Mandatory'" src="images/mandatory.gif" alt="mandatory">
+                    <img ng-if="node.type == 'Optional'" src="images/optional.gif" alt="optional">
+                    {{node.title}}
+                    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeNode(this)">
+                        <span class="glyphicon glyphicon-remove"></span>
                     </a>
-                        {{node.title}}
-                    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span class="glyphicon glyphicon-remove"></span></a>
-                    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus"></span></a>
+                    <a class="pull-right btn btn-primary btn-xs" ng-disable="addingNode" data-nodrag ng-click="goToAddingNode(this)" style="margin-right: 8px;">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
                 </div>
                 <ol ui-tree-nodes="" ng-model="node.nodes">
                     <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
@@ -26,13 +24,31 @@
                 </ol>
             </script>
             <div ui-tree>
-                <ol ui-tree-nodes="" ng-model="data" id="tree-root">
-                    <li ng-repeat="node in data" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                <ol ui-tree-nodes="" ng-model="tree" id="tree-root">
+                    <li ng-repeat="node in tree" ui-tree-node ng-include="'nodes_renderer.html'"></li>
                 </ol>
             </div>
         </div>
     </div>
-     
+    
+    <div ng-show="addingNode" style="padding-bottom: 35px; padding-left: 20px;">
+        <h2 class="form-title">New node</h2>       
+        <label class="control-label">Title</label>
+            <input type="text" class="form-control" ng-model="title">
+        <div style="padding-top: 15px;">
+            <label class="control-label">Type</label>
+            <select id="type" ng-model="type">
+                <option value="OR Group">Or Group</option>
+                <option value="XOR Group">XOR Group</option>
+                <option value="Mandatory">Mandatory</option>
+                <option value="Optional">Optional</option>
+            </select>
+        </div> 
+        <div style="padding-top: 10px;">
+            <button class="btn btn-default" ng-click="addNode()" ng-disabled="type===''||title===''">Add</button>
+        </div>
+    </div>
+    
     <form  novalidate class="simple-form">
         <div class="form-group">
             <label class="col-sm-2 col-sm-2 control-label">Summary</label>

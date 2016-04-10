@@ -4,11 +4,11 @@ angular.module('treeApp')
     $scope.resetForm = function() {
         $scope.title = "";
         $scope.description = "";
+        $scope.rootTitle = "";
     };
     
     $scope.addFeatureFormController = function() {
-        //title:$scope.title,description:$scope.description,tree:[],versions:[],contributors:[],author:factory.currentUser.username;
-        factory.addFeatureModel($scope.title, $scope.description);
+        factory.addFeatureModel($scope.title, $scope.description, $scope.rootTitle);
         $scope.resetForm();
     };
   });
