@@ -1,5 +1,5 @@
 angular.module('treeApp')
-  .controller('EditorCtrl', function ($scope, factory) {
+  .controller('EditorCtrl', function ($scope, $compile, factory) {
     
     $scope.addingNode = false;
     
@@ -11,6 +11,14 @@ angular.module('treeApp')
     
     $scope.type="";
 
+    $scope.addToLeft = function() {
+        angular.element(document.getElementById('right-space')).append($compile("<div><button class='btn btn-default'>Show alert</button></div>")($scope));
+    };
+    
+    $scope.addToRight = function(scope) {
+        angular.element(document.getElementById('right-space')).append($compile("<div><button class='btn btn-default'>Show alert</button></div>")($scope));
+    };
+    
     $scope.addNode = function () {
         if($scope.nodeData.nodes) {
             $scope.nodeData.nodes.push({
