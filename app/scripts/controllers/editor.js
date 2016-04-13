@@ -10,13 +10,25 @@ angular.module('treeApp')
     $scope.date=null;
     
     $scope.type="";
+    
+    $scope.addingConstraints = false;
+    
+    $scope.numFeaturesLeft=0;
+    
+    $scope.numFeaturesRight=0;
+    
+    $scope.goToAddingConstraints = function() {
+        $scope.addingConstraints = true;
+        $scope.numFeaturesLeft=1;
+        $scope.numFeaturesRight=1;
+    };
 
     $scope.addToLeft = function() {
-        angular.element(document.getElementById('right-space')).append($compile("<div><button class='btn btn-default'>Show alert</button></div>")($scope));
+        angular.element(document.getElementById('left-space')).append($compile("<select class='form-control' style='width:80px'><option value='and'>and</option><option value='or'>or</option></select><select class='form-control' style='width:200px'><option ng-repeat='feature in features' value='{{feature.title}}'>{{feature.title}}</option><option ng-repeat='feature in features' value='not {{feature.title}}'>Not {{feature.title}}</option></select>")($scope));
     };
-    
-    $scope.addToRight = function(scope) {
-        angular.element(document.getElementById('right-space')).append($compile("<div><button class='btn btn-default'>Show alert</button></div>")($scope));
+
+    $scope.addToRight = function() {
+        angular.element(document.getElementById('right-space')).append($compile("<select class='form-control' style='width:80px'><option value='and'>and</option><option value='or'>or</option></select><select class='form-control' style='width:200px'><option ng-repeat='feature in features' value='{{feature.title}}'>{{feature.title}}</option><option ng-repeat='feature in features' value='not {{feature.title}}'>Not {{feature.title}}</option></select>")($scope));
     };
     
     $scope.addNode = function () {

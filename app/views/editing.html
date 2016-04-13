@@ -50,30 +50,36 @@
     </div>
     <div class="container" style="width:50%; float:right;">
         <h2 class="form-title">Constraints</h2>
-        <div class="container">
+        <div ng-hide="addingConstraints">
+            <button class="btn btn-default" ng-click="goToAddingConstraints()">Add new constraint</button>
+        </div>
+        <div class="container" ng-show="addingConstraints">
             <span class="input-group-btn" style="display:inline-block;">
                 <button class="btn btn-default" ng-click="addToLeft()">Add to left</button>
                 <button class="btn btn-default" ng-click="addToRight()">Add to right</button>
             </span>
-        </div>
-        <div class="form-inline">
-            <div class="form-group" style="margin-right:20px">
-                <div id="left-space">
-                    <select class="form-control" style="width:200px">
-                        <option ng-repeat="feature in features" value="{{feature.title}}">{{feature.title}}</option>
-                        <option ng-repeat="feature in features" value="not {{feature.title}}">Not {{feature.title}}</option>
+            <div class="form-inline">
+                <div class="form-group" style="margin-right:20px">
+                    <div id="left-space">
+                        <select class="form-control" style="width:200px">
+                            <option ng-repeat="feature in features" value="{{feature.title}}">{{feature.title}}</option>
+                            <option ng-repeat="feature in features" value="not {{feature.title}}">Not {{feature.title}}</option>
+                        </select>
+                    </div>
+                    <select class="form-control" style="width:120px">
+                        <option value="excludes">excludes</option>
+                        <option value="requires">requires</option>
                     </select>
+                    <div id="right-space">
+                        <select class="form-control" style="width:200px">
+                            <option ng-repeat="feature in features" value="{{feature.title}}">{{feature.title}}</option>
+                            <option ng-repeat="feature in features" value="not {{feature.title}}">Not {{feature.title}}</option>
+                        </select>
+                    </div>
                 </div>
-                <select class="form-control" style="width:30px">
-                    <option value="excludes">excludes</option>
-                    <option value="requires">requires</option>
-                </select>
-                <div id="right-space">
-                    <select class="form-control" style="width:200px">
-                        <option ng-repeat="feature in features" value="{{feature.title}}">{{feature.title}}</option>
-                        <option ng-repeat="feature in features" value="not {{feature.title}}">Not {{feature.title}}</option>
-                    </select>
-                </div>
+            </div>
+            <div style="padding: 10px;">
+                
             </div>
         </div>
     </div>
