@@ -50,6 +50,11 @@
     </div>
     <div class="container" style="width:50%; float:right;">
         <h2 class="form-title">Constraints</h2>
+        <div ng-repeat="constraint in constraints" style="padding:5px 10px">
+            <label>
+                {{constraint}}
+            </label>
+        </div>
         <div ng-hide="addingConstraints">
             <button class="btn btn-default" ng-click="goToAddingConstraints()">Add new constraint</button>
         </div>
@@ -61,17 +66,17 @@
             <div class="form-inline">
                 <div class="form-group" style="margin-right:20px">
                     <div id="left-space">
-                        <select class="form-control" style="width:200px">
+                        <select class="form-control" ng-model="featuresLeft[0]" style="width:200px">
                             <option ng-repeat="feature in features" value="{{feature.title}}">{{feature.title}}</option>
                             <option ng-repeat="feature in features" value="not {{feature.title}}">Not {{feature.title}}</option>
                         </select>
                     </div>
-                    <select class="form-control" style="width:120px">
+                    <select class="form-control" ng-model='middle' style="width:120px">
                         <option value="excludes">excludes</option>
                         <option value="requires">requires</option>
                     </select>
                     <div id="right-space">
-                        <select class="form-control" style="width:200px">
+                        <select class="form-control" ng-model="featuresRight[0]" style="width:200px">
                             <option ng-repeat="feature in features" value="{{feature.title}}">{{feature.title}}</option>
                             <option ng-repeat="feature in features" value="not {{feature.title}}">Not {{feature.title}}</option>
                         </select>
@@ -79,7 +84,10 @@
                 </div>
             </div>
             <div style="padding: 10px;">
-                
+                <button class="btn btn-default" ng-click="addConstraint()" ng-disabled="middle===''">Create</button>
+            </div>
+            <div style="padding:10px;width:50%;" class="warning" ng-show="error">
+                <span ng-show="error">Constraint is badly formulated</span>
             </div>
         </div>
     </div>

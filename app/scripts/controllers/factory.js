@@ -57,7 +57,6 @@ angular.module('treeApp')
                 factory.recursion(list, factory.featureModel.tree[i]);
             }
         }
-        console.log(list);
         return list;
       };
       
