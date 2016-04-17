@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Configurations</h2>
+    <div> 
+        <div ng-repeat="configuration in featureModel.configurations" style="padding:5px 10px; vertical-align: middle;">
+            <label style="width: 300px; display:inline-block;">
+                {{configuration.title}}
+            </label>
+            <span class="input-group-btn" style="display:inline-block;">
+                <a ui-sref="home" class="btn btn-default" ng-click="selectConfiguration($index)" aria-label="Configure">Configure</a>
+            </span>
+        </div>
+        <button class="btn btn-default" ng-click="goToCreate()">Create new configuration</button>
+    </div>
+    <div style="padding:10px" ng-show="creating">
+        <form  novalidate class="simple-form">
+            <div class="form-group">
+                <label class="control-label">Title</label>
+                <input type="text" class="form-control" ng-model="title">
+            </div>
+            <div class="form-group">
+                <label class="control-label">Description</label>
+                    <input type="text" class="form-control" ng-model="description">
+                    <span class="help-block">Describe the content of your new feature model</span>
+            </div>
+            <button class="btn btn-default" ng-click="cancelCreation()">Cancel</button>
+            <button class="btn btn-default" ng-click="addConfiguration()">Create</button>
+        </form>
+    </div>
+    <div class="warning" ng-if="error">
+        <label class="control-label">Cannot have configurations with the same name</label>
+    </div>
+</div>

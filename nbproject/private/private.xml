@@ -5,7 +5,7 @@
             <url>app/scripts/controllers/factory.js</url>
             <bookmark id="1">
                 <name/>
-                <line>139</line>
+                <line>138</line>
                 <key/>
             </bookmark>
         </file>
@@ -32,6 +32,7 @@
             <file>file:/D:/Documents/GitHub/Tree/app/views/home.html</file>
             <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/editor.js</file>
             <file>file:/D:/Documents/GitHub/Tree/app/index.html</file>
+            <file>file:/D:/Documents/GitHub/Tree/app/scripts/controllers/factory.js</file>
         </group>
     </open-files>
 </project-private>

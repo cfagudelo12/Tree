@@ -134,6 +134,44 @@ angular.module('treeApp')
           });        
       };
       
+      factory.addConfiguration = function(configuration) {
+          var configurationsRef=new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels/"+factory.featureModel.$id+"/configurations");
+          var configurations=$firebaseArray(configurationsRef);
+          var promise = configurations.$loaded().then(function() {
+              var result=null;
+              var encontrado=false;
+              for (var i = 0; i < configurations.length && !encontrado; i++) {
+                  if(configuration.title===configurations[i].title) {
+                      encontrado=true;
+                      result="Error";
+                  }   
+              }
+              if(!encontrado) {
+                  var tree=factory.configurationCreator();
+                  configuration.tree=tree;
+                  configurations.$add(configuration);
+              }
+              return result;
+          });
+          return promise;
+      };
+      
+      factory.configurationCreator = function() {
+          var tree=factory.featureModel.tree;
+          for(var i=0; i<tree.length; i++) {
+              tree[i].state="Undecided";
+              factory.configurationRecursion(tree[i]);
+          }
+          return tree;
+      };
+      
+      factory.configurationRecursion = function(node) {
+          node.state="Undecided";
+          for(var i=0; node.nodes&&i<node.nodes.length; i++) {
+              factory.configurationRecursion(node.nodes[i]);
+          }
+      };
+      
       return factory;
   });
 
