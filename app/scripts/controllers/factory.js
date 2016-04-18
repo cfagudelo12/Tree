@@ -159,7 +159,12 @@ angular.module('treeApp')
       factory.configurationCreator = function() {
           var tree=factory.featureModel.tree;
           for(var i=0; i<tree.length; i++) {
-              tree[i].state="Undecided";
+              if(tree[i].type==="Root Node"){
+                  tree[i].state="Auto-selected";
+              }
+              else {
+                  tree[i].state="Undecided";
+              }
               factory.configurationRecursion(tree[i]);
           }
           return tree;
@@ -170,6 +175,22 @@ angular.module('treeApp')
           for(var i=0; node.nodes&&i<node.nodes.length; i++) {
               factory.configurationRecursion(node.nodes[i]);
           }
+      };
+      
+      factory.selectConfiguration = function(index) {
+          factory.configurationIndex=index;
+          var configurationsRef=new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels/"+factory.featureModel.$id+"/configurations");
+          var configurations=$firebaseArray(configurationsRef); 
+          configurations.$loaded().then(function() {
+              factory.configuration=configurations[index];
+          });
+      };
+      
+      factory.saveConfiguration = function() {
+          var configurationsRef=new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels/"+factory.featureModel.$id+"/configurations");
+          var configurations=$firebaseArray(configurationsRef);
+          configurations[factory.configurationIndex]=factory.configuration;
+          configurations.$save(factory.configurationIndex);
       };
       
       return factory;

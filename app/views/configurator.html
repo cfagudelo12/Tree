@@ -1,1 +1,38 @@
-
+<h2 class="form-title">Configuring {{configuration.title}}</h2>
+<div class="row">
+    <div>
+        <script type="text/ng-template" id="nodes_renderer.html">
+            <div ui-tree-handle class="tree-node tree-node-content angular-ui-tree-handle">
+                <img ng-if="node.type == 'Root Node'" src="images/root.gif" alt="root">
+                <img ng-if="node.type == 'OR Group'" src="images/OR.gif" alt="OR">
+                <img ng-if="node.type == 'XOR Group'" src="images/XOR.gif" alt="XOR">
+                <img ng-if="node.type == 'Mandatory'" src="images/mandatory.gif" alt="mandatory">
+                <img ng-if="node.type == 'Optional'" src="images/optional.gif" alt="optional">
+                <img ng-if="node.state == 'Undecided'" src="images/undecided.gif" alt="undecided" style="margin-right: 8px;">
+                <img ng-if="node.state == 'Auto-selected'" src="images/auto-selected.gif" alt="auto-selected" style="margin-right: 8px;">
+                <img ng-if="node.state == 'Auto-deselected'" src="images/auto-deselected.gif" alt="auto-deselected" style="margin-right: 8px;">
+                <img ng-if="node.state == 'Selected'" src="images/selected.gif" alt="selected" style="margin-right: 8px;">
+                <img ng-if="node.state == 'Deselected'" src="images/deselected.gif" alt="deselected" style="margin-right: 8px;">
+                {{node.title}}
+                <a ng-if="node.state !== 'Auto-selected'&&node.state !== 'Auto-deselected'" class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="deselectFeature(this)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+                <a ng-if="node.state !== 'Auto-selected'&&node.state !== 'Auto-deselected'" class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="selectFeature(this)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+            <ol ui-tree-nodes="" ng-model="node.nodes">
+                <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+                </li>
+            </ol>
+        </script>
+        <div ui-tree data-drag-enabled="false">
+            <ol ui-tree-nodes="" ng-model="tree" id="tree-root">
+                <li ng-repeat="node in tree" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+            </ol>
+        </div>
+    </div>
+    <div style="padding: 10px;">
+        <button class="btn btn-default" ng-click="saveConfiguration()">Save</button>
+    </div>
+</div>

@@ -28,4 +28,8 @@ angular.module('treeApp')
           $scope.description=null;
           $scope.creating=false;
       };
+      
+      $scope.selectConfiguration = function(index) {
+          factory.selectConfiguration(index);
+      };
 });

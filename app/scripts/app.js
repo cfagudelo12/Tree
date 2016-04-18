@@ -35,6 +35,11 @@ angular.module('treeApp', ['ui.tree','ui.router','firebase','ui.bootstrap']).con
       url: "/configurations",
       templateUrl: "views/configurations.html",
       controller: 'ConfigurationsCtrl'
+    })
+    .state('configurating', {
+      url: "/configurator",
+      templateUrl: "views/configurator.html",
+      controller: 'ConfiguratorCtrl'
     });
   });
 
