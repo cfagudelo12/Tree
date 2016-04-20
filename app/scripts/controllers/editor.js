@@ -13,6 +13,8 @@ angular.module('treeApp')
     
     $scope.addingConstraints = false;
     
+    $scope.addingAttributes = false;
+    
     $scope.constraints=[];
     
     $scope.goToAddingConstraints = function() {
@@ -26,7 +28,7 @@ angular.module('treeApp')
         $scope.featuresLeft.push({error:true});
         $scope.featuresRight.push({error:true});
     };
-
+    
     $scope.addToLeft = function() {
         $scope.leftIsNotOk=true;
         var id=$scope.featuresLeft.length;
@@ -135,8 +137,20 @@ angular.module('treeApp')
         $scope.addingNode=false;
     };
     
+    $scope.goToAddingAttribute = function(scope) {
+        $scope.nodeData=scope.$modelValue;
+        $scope.attribute={};
+        $scope.addingAttribute = true;
+    };
+    
+    $scope.addAttribute = function() {
+        $scope.nodeData.attributes.push($scope.attribute);
+        $scope.addingAttribute = false;
+    };
+    
     $scope.goToAddingNode = function(scope) {
         $scope.nodeData=scope.$modelValue;
+        $scope.nodeData.attributes=[];
         $scope.addingNode = true;
     };
 
