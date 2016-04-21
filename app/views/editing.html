@@ -11,22 +11,22 @@
                         <img ng-if="node.type == 'Mandatory'" src="images/mandatory.gif" alt="mandatory">
                         <img ng-if="node.type == 'Optional'" src="images/optional.gif" alt="optional">
                         {{node.title}}
-                        <a ng-if="node.type != 'Root Node'" class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeNode(this)">
+                        <button ng-if="node.type != 'Root Node'" class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeNode(this)">
                             <span class="glyphicon glyphicon-remove"></span>
-                        </a>
-                        <a class="pull-right btn btn-primary btn-xs" ng-disable="addingNode" data-nodrag ng-click="goToAddingNode(this)" style="margin-right: 8px;">
+                        </button>
+                        <button class="pull-right btn btn-primary btn-xs" ng-if="!addingNode&&!addingAttribute" data-nodrag ng-click="goToAddingNode(this)" style="margin-right: 8px;">
                             <span class="glyphicon glyphicon-plus"></span>
-                        </a>
-                        <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="showingAttributes=!showingAttributes" style="margin-right: 8px;">
+                        </button>
+                        <button class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="showingAttributes=!showingAttributes" style="margin-right: 8px;">
                             <span class="glyphicon glyphicon-th-list"></span>
-                        </a>
+                        </button>
                         <div ng-show="showingAttributes">
                             <div ng-repeat="attribute in node.attributes" style="padding-left:20px;padding-top:10px">
                                 {{attribute.name}}:         {{attribute.value}}
                             </div>
-                            <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-disable="addingNode" ng-click="goToAddingAttribute(this)" style="margin-right: 8px;">
+                            <button class="btn btn-primary btn-xs" data-nodrag ng-if="!addingAttribute&&!addingAttribute" ng-click="goToAddingAttribute(this)" style="margin-left:20px;margin-top:10px">
                                 <span class="glyphicon glyphicon-pencil"></span>
-                            </a>
+                            </button>
                         </div>
                     </div>
                     <ol ui-tree-nodes="" ng-model="node.nodes">
@@ -54,29 +54,29 @@
                     <option value="Optional">Optional</option>
                 </select>
             </div>
-            <div class="info" style="padding-top: 10px; padding-right: 50px;" ng-show="addingAttribute">
-                <h3>New attribute</h3>
-                <div>
-                    <label class='control-label'>Name</label>
-                    <input type='text' class='form-control' ng-model='attribute.name'>
-                </div>
-                <div style='padding-top: 15px;'>
-                    <label class='control-label'>Type</label>
-                    <select id='type' ng-model='attribute.type'>
-                        <option value='Integer'>Integer</option>
-                        <option value='Double'>Double</option>
-                        <option value='String'>String</option>
-                    </select>
-                </div>
-                <div style='padding-top: 8px;'>
-                    <label class='control-label'>Value</label>
-                    <input type='text' class='form-control' ng-model='attribute.value'>
-                </div>
-                <button class="btn btn-default" ng-click="addAttribute()" ng-disabled="!attribute.type||!attribute.name||!attribute.value">Add</button>
-            </div>
             <div style="padding-top: 10px;">
                 <button class="btn btn-default" ng-click="addNode()" ng-disabled="type===''||title===''">Add</button>
             </div>
+        </div>
+        <div ng-show="addingAttribute" class="info" style="padding-top: 10px; padding-right: 50px;">
+            <h3>New attribute</h3>
+            <div>
+                <label class='control-label'>Name</label>
+                <input type='text' class='form-control' ng-model='attribute.name'>
+            </div>
+            <div style='padding-top: 15px;'>
+                <label class='control-label'>Type</label>
+                <select id='type' ng-model='attribute.type'>
+                    <option value='Integer'>Integer</option>
+                    <option value='Double'>Double</option>
+                    <option value='String'>String</option>
+                </select>
+            </div>
+            <div style='padding-top: 8px;'>
+                <label class='control-label'>Value</label>
+                <input type='text' class='form-control' ng-model='attribute.value'>
+            </div>
+            <button class="btn btn-default" ng-click="addAttribute()" ng-disabled="!attribute.type||!attribute.name||!attribute.value">Add</button>
         </div>
     </div>
     <div class="container" style="width:50%; float:right;">

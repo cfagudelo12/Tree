@@ -13,7 +13,7 @@ angular.module('treeApp')
     
     $scope.addingConstraints = false;
     
-    $scope.addingAttributes = false;
+    $scope.addingAttribute = false;
     
     $scope.constraints=[];
     
@@ -144,7 +144,13 @@ angular.module('treeApp')
     };
     
     $scope.addAttribute = function() {
-        $scope.nodeData.attributes.push($scope.attribute);
+        if($scope.nodeData.attributes) {
+            $scope.nodeData.attributes.push($scope.attribute);
+        }
+        else {
+            $scope.nodeData.attributes=[];
+            $scope.nodeData.attributes.push($scope.attribute);
+        }
         $scope.addingAttribute = false;
     };
     
