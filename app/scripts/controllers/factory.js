@@ -159,19 +159,18 @@ angular.module('treeApp')
       factory.configurationCreator = function() {
           var tree=factory.featureModel.tree;
           for(var i=0; i<tree.length; i++) {
-              if(tree[i].type==="Root Node"){
-                  tree[i].state="Auto-selected";
-              }
-              else {
-                  tree[i].state="Undecided";
-              }
               factory.configurationRecursion(tree[i]);
           }
           return tree;
       };
       
       factory.configurationRecursion = function(node) {
-          node.state="Undecided";
+          if(node.type==="Root Node"){
+              node.state="Auto-selected";
+          }
+          else {
+              node.state="Undecided";
+          }
           for(var i=0; node.nodes&&i<node.nodes.length; i++) {
               factory.configurationRecursion(node.nodes[i]);
           }

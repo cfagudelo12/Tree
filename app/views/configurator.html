@@ -1,5 +1,5 @@
 <h2 class="form-title">Configuring {{configuration.title}}</h2>
-<div class="row">
+<div class="row" style="margin-left: 50px; margin-right: 50px;">
     <div>
         <script type="text/ng-template" id="nodes_renderer.html">
             <div ui-tree-handle class="tree-node tree-node-content angular-ui-tree-handle">
@@ -20,6 +20,14 @@
                 <a ng-if="node.state !== 'Auto-selected'&&node.state !== 'Auto-deselected'" class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="selectFeature(this)">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
+                <a ng-if="node.state !== 'Auto-selected'&&node.state !== 'Auto-deselected'&&node.type !== 'Mandatory'&&!node.prefered" class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="preferFeature(this)">
+                    {{node.preferedBy.length}}
+                    <span class="glyphicon glyphicon-star"></span>
+                </a>
+                <a ng-if="node.prefered" class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="depreferFeature(this)">
+                    {{node.preferedBy.length}}
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                </a>
             </div>
             <ol ui-tree-nodes="" ng-model="node.nodes">
                 <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
@@ -32,7 +40,8 @@
             </ol>
         </div>
     </div>
-    <div style="padding: 10px;">
+    <span class="input-group-btn" style="display:inline-block; padding: 10px;">
         <button class="btn btn-default" ng-click="saveConfiguration()">Save</button>
-    </div>
+        <a ui-sref="home" class="btn btn-default" ng-click="saveConfiguration()">Go Back</a>
+    </span>
 </div>

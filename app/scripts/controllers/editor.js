@@ -3,6 +3,8 @@ angular.module('treeApp')
     
     $scope.addingNode = false;
     
+    $scope.editingNode = false;
+    
     $scope.summary=null;
     
     $scope.description=null;
@@ -14,6 +16,8 @@ angular.module('treeApp')
     $scope.addingConstraints = false;
     
     $scope.addingAttribute = false;
+    
+    $scope.editingAttribute = false;
     
     $scope.constraints=[];
     
@@ -116,7 +120,12 @@ angular.module('treeApp')
         }
     };
     
-    $scope.addNode = function () {
+    $scope.goToAddingNode = function(scope) {
+        $scope.nodeData=scope.$modelValue;
+        $scope.addingNode = true;
+    };
+    
+    $scope.addNode = function() {
         if($scope.nodeData.nodes) {
             $scope.nodeData.nodes.push({
                 title: $scope.title,
@@ -134,13 +143,35 @@ angular.module('treeApp')
         }
         $scope.nodeData=null;
         $scope.title=null;
+        $scope.type=null;
         $scope.addingNode=false;
+    };
+    
+    $scope.goToEditingNode = function(scope) {
+        $scope.nodeData=scope.$modelValue;
+        $scope.editingNode = true;
+    };
+    
+    $scope.editNode = function() {
+        $scope.nodeData.title=$scope.title;
+        $scope.nodeData.type=$scope.type;
+        $scope.nodeData=null;
+        $scope.title=null;
+        $scope.type="";
+        $scope.index=-1;
+        $scope.editingNode=false;
     };
     
     $scope.goToAddingAttribute = function(scope) {
         $scope.nodeData=scope.$modelValue;
         $scope.attribute={};
         $scope.addingAttribute = true;
+    };
+    
+    $scope.goToEditingAttribute = function(scope,index) {
+        $scope.nodeData=scope.$modelValue;
+        $scope.index=index;
+        $scope.editingAttribute=true;
     };
     
     $scope.addAttribute = function() {
@@ -152,12 +183,18 @@ angular.module('treeApp')
             $scope.nodeData.attributes.push($scope.attribute);
         }
         $scope.addingAttribute = false;
+        $scope.attribute=null;
     };
     
-    $scope.goToAddingNode = function(scope) {
+    $scope.editAttribute = function() {
+        $scope.nodeData.attributes[$scope.index]=$scope.attribute;
+        $scope.attribute=null;
+        $scope.editingAttribute=false;
+    };
+    
+    $scope.removeAttribute = function(scope, index) {
         $scope.nodeData=scope.$modelValue;
-        $scope.nodeData.attributes=[];
-        $scope.addingNode = true;
+        $scope.nodeData.attributes.splice(index, 1);
     };
 
     $scope.featureModel=factory.featureModel;
