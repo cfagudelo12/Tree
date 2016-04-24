@@ -127,10 +127,11 @@
     </div>
     <div class="container" style="width:50%; float:right;">
         <h2 class="form-title">Constraints</h2>
-        <div ng-repeat="constraint in constraints" style="padding:5px 10px">
-            <label>
-                {{constraint}}
-            </label>
+        <div ng-repeat="constraint in featureModel.constraints" style="padding:5px 10px">
+            {{constraint.string}}
+            <button class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeConstraint($index)">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
         </div>
         <div ng-hide="addingConstraints">
             <button class="btn btn-default" ng-click="goToAddingConstraints()">Add new constraint</button>

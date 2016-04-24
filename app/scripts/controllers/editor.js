@@ -19,8 +19,6 @@ angular.module('treeApp')
     
     $scope.editingAttribute = false;
     
-    $scope.constraints=[];
-    
     $scope.goToAddingConstraints = function() {
         $scope.error=false;
         $scope.addingConstraints = true;
@@ -74,13 +72,6 @@ angular.module('treeApp')
             }
         }
         if(!hayError) {
-            var constraint={
-                leftFeatures:$scope.featuresLeft,
-                leftBooleans:$scope.booleansLeft,
-                middle:$scope.middle,
-                rightFeatures:$scope.featuresRight,
-                rightBooleans:$scope.booleansRight
-            };
             var result = "";
             var indexLeftBool=0;
             var indexRightBool=0;
@@ -105,7 +96,14 @@ angular.module('treeApp')
                     indexRightBool++;
                 }
             }
-            $scope.constraints.push(result);
+            var constraint={
+                leftFeatures:$scope.featuresLeft,
+                leftBooleans:$scope.booleansLeft,
+                middle:$scope.middle,
+                rightFeatures:$scope.featuresRight,
+                rightBooleans:$scope.booleansRight,
+                string:result
+            };
             if($scope.featureModel.constraints) {
                 $scope.featureModel.constraints.push(constraint);
             }
@@ -118,6 +116,10 @@ angular.module('treeApp')
         else {
             $scope.error=true;
         }
+    };
+    
+    $scope.removeConstraint = function(index) {
+        $scope.featureModel.constraints.splice(index, 1);
     };
     
     $scope.goToAddingNode = function(scope) {
