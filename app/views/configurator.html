@@ -22,11 +22,19 @@
                 </a>
                 <a ng-if="node.state !== 'Auto-selected'&&node.state !== 'Auto-deselected'&&node.type !== 'Mandatory'&&!node.prefered" class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="preferFeature(this)">
                     {{node.preferedBy.length}}
-                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
                 </a>
-                <a ng-if="node.prefered" class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="depreferFeature(this)">
+                <a ng-if="node.prefered" class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="noPreferFeature(this)">
                     {{node.preferedBy.length}}
-                    <span class="glyphicon glyphicon-star-empty"></span>
+                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                </a>
+                <a ng-if="node.state !== 'Auto-selected'&&node.state !== 'Auto-deselected'&&node.type !== 'Mandatory'&&!node.deprefered" class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="depreferFeature(this)">
+                    {{node.depreferedBy.length}}
+                    <span class="glyphicon glyphicon-thumbs-down"></span>
+                </a>
+                <a ng-if="node.deprefered" class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="noDepreferFeature(this)">
+                    {{node.depreferedBy.length}}
+                    <span class="glyphicon glyphicon-thumbs-down"></span>
                 </a>
             </div>
             <ol ui-tree-nodes="" ng-model="node.nodes">

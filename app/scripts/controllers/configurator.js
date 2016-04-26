@@ -27,13 +27,38 @@ angular.module('treeApp')
           }
       };
       
-      $scope.depreferFeature = function(scope) {
+      $scope.noPreferFeature = function(scope) {
           $scope.nodeData=scope.$modelValue;
           $scope.nodeData.prefered=false;
           var found=false;
           for(var i = 0; i < $scope.nodeData.preferedBy.length && !found; i++) {
               if($scope.nodeData.preferedBy[i]===factory.currentUser) {
                   $scope.nodeData.preferedBy.splice(i,1);
+                  found=true;
+              }
+          }
+      };
+      
+      $scope.depreferFeature = function(scope) {
+          $scope.nodeData=scope.$modelValue;
+          if($scope.nodeData.depreferedBy) {
+              $scope.nodeData.depreferedBy.push(factory.currentUser);
+              $scope.nodeData.deprefered=true;
+          }
+          else {
+              $scope.nodeData.depreferedBy=[];
+              $scope.nodeData.depreferedBy.push(factory.currentUser);
+              $scope.nodeData.deprefered=true;
+          }
+      };
+      
+      $scope.noDepreferFeature = function(scope) {
+          $scope.nodeData=scope.$modelValue;
+          $scope.nodeData.deprefered=false;
+          var found=false;
+          for(var i = 0; i < $scope.nodeData.depreferedBy.length && !found; i++) {
+              if($scope.nodeData.depreferedBy[i]===factory.currentUser) {
+                  $scope.nodeData.depreferedBy.splice(i,1);
                   found=true;
               }
           }
