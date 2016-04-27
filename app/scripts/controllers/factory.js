@@ -81,13 +81,14 @@ angular.module('treeApp')
           factory.featureModels.$save(factory.featureModelIndex);
       };
       
-      factory.saveFeatureModelVersion = function(summary, description, date) {
+      factory.saveFeatureModelVersion = function(summary, description, date, tree) {
           var versionsRef=new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels/"+factory.featureModel.$id+"/versions");
           var versions=$firebaseArray(versionsRef);
           versions.$add({
               summary:summary,
               description:description,
-              date:date
+              date:date,
+              tree:tree
           });
       };
       
@@ -185,11 +186,19 @@ angular.module('treeApp')
           });
       };
       
-      factory.saveConfiguration = function() {
+      factory.saveConfiguration = function(summary,description,date) {
           var configurationsRef=new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels/"+factory.featureModel.$id+"/configurations");
           var configurations=$firebaseArray(configurationsRef);
+          var versionsRef=new Firebase(baseRef+"/users/"+factory.currentUser+"/featureModels/"+factory.featureModel.$id+"/configurations/"+factory.configuration.$id+"/versions");
+          var versions=$firebaseArray(versionsRef);
           configurations[factory.configurationIndex]=factory.configuration;
           configurations.$save(factory.configurationIndex);
+          versions.$add({
+              summary:summary,
+              description:description,
+              date:date,
+              configuration:factory.configuration.tree
+          });
       };
       
       return factory;

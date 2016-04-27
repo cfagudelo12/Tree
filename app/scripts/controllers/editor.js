@@ -221,7 +221,7 @@ angular.module('treeApp')
     
     $scope.saveFeatureModel = function() {
         factory.saveFeatureModel();
-        factory.saveFeatureModelVersion($scope.summary,$scope.description,$scope.date);
+        factory.saveFeatureModelVersion($scope.summary,$scope.description,$scope.date,$scope.featureModel.tree);
     };
   });
 

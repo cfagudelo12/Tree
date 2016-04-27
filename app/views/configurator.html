@@ -48,8 +48,22 @@
             </ol>
         </div>
     </div>
-    <span class="input-group-btn" style="display:inline-block; padding: 10px;">
-        <button class="btn btn-default" ng-click="saveConfiguration()">Save</button>
-        <a ui-sref="home" class="btn btn-default" ng-click="saveConfiguration()">Go Back</a>
-    </span>
+    <div>
+        <h2 class="form-title">Save new version</h2>
+        <form novalidate class="simple-form">
+            <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Summary</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="summary">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-sm-2 control-label">Description</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="description">
+                </div>
+            </div>
+            <a ui-sref="home" class="btn btn-default" ng-click="saveConfiguration()">Save</a>
+        </form>
+    </div>
 </div>
