@@ -145,8 +145,8 @@ angular.module('treeApp')
             };
             $scope.featureModel.constraints[$scope.constraintIndex]=constraint;
             $scope.editingConstraints=false;
-            angular.element(document.getElementById('left-space-edit')).replaceWith(leftElement);
-            angular.element(document.getElementById('right-space-edit')).replaceWith(rightElement);
+            angular.element(document.getElementById('left-space-edit')).replaceWith($compile("<div id='left-space-edit'><select class='form-control' ng-model='featuresLeft[0]' style='width:200px'><option ng-repeat='feature in features' value='{{feature.title}}'>{{feature.title}}</option><option ng-repeat='feature in features' value='not {{feature.title}}'>Not {{feature.title}}</option></select></div>")($scope));
+            angular.element(document.getElementById('right-space-edit')).replaceWith($compile("<div id='right-space-edit'><select class='form-control' ng-model='featuresRight[0]' style='width:200px'><option ng-repeat='feature in features' value='{{feature.title}}'>{{feature.title}}</option><option ng-repeat='feature in features' value='not {{feature.title}}'>Not {{feature.title}}</option></select></div>")($scope));
         }
         else {
             $scope.error=true;
@@ -234,8 +234,8 @@ angular.module('treeApp')
                  $scope.featureModel.constraints.push(constraint);
             }
             $scope.addingConstraints=false;
-            angular.element(document.getElementById('left-space')).replaceWith(leftElement);
-            angular.element(document.getElementById('right-space')).replaceWith(rightElement);
+            angular.element(document.getElementById('left-space')).replaceWith($compile("<div id='left-space'><select class='form-control' ng-model='featuresLeft[0]' style='width:200px'><option ng-repeat='feature in features' value='{{feature.title}}'>{{feature.title}}</option><option ng-repeat='feature in features' value='not {{feature.title}}'>Not {{feature.title}}</option></select></div>")($scope));
+            angular.element(document.getElementById('right-space')).replaceWith($compile("<div id='right-space'><select class='form-control' ng-model='featuresRight[0]' style='width:200px'><option ng-repeat='feature in features' value='{{feature.title}}'>{{feature.title}}</option><option ng-repeat='feature in features' value='not {{feature.title}}'>Not {{feature.title}}</option></select></div>")($scope));
         }
         else {
             $scope.error=true;
