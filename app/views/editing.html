@@ -132,10 +132,11 @@
             <button class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeConstraint($index)">
                 <span class="glyphicon glyphicon-remove"></span>
             </button>
+            <button class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="goToEditingConstraint($index,this)" style="margin-right: 8px;">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
         </div>
-        <div ng-hide="addingConstraints">
-            <button class="btn btn-default" ng-click="goToAddingConstraints()">Add new constraint</button>
-        </div>
+        <button ng-if="!addingConstraints&&!editingConstraints" class="btn btn-default" ng-click="goToAddingConstraints()">Add new constraint</button>
         <div class="container" ng-show="addingConstraints">
             <span class="input-group-btn" style="display:inline-block;">
                 <button class="btn btn-default" ng-click="addToLeft()">Add to left</button>
@@ -163,6 +164,38 @@
             </div>
             <div style="padding: 10px;">
                 <button class="btn btn-default" ng-click="addConstraint()" ng-disabled="middle===''">Create</button>
+            </div>
+            <div style="padding:10px;width:50%;" class="warning" ng-show="error">
+                <span ng-show="error">Constraint is badly formulated</span>
+            </div>
+        </div>
+        <div class="container" ng-show="editingConstraints">
+            <span class="input-group-btn" style="display:inline-block;">
+                <button class="btn btn-default" ng-click="addToLeftEdit()">Add to left</button>
+                <button class="btn btn-default" ng-click="addToRightEdit()">Add to right</button>
+            </span>
+            <div class="form-inline">
+                <div class="form-group" style="margin-right:20px">
+                    <div id="left-space-edit">
+                        <select class="form-control" ng-model="featuresLeft[0]" style="width:200px">
+                            <option ng-repeat="feature in features" value="{{feature.title}}">{{feature.title}}</option>
+                            <option ng-repeat="feature in features" value="not {{feature.title}}">Not {{feature.title}}</option>
+                        </select>
+                    </div>
+                    <select class="form-control" ng-model='middle' style="width:120px">
+                        <option value="excludes">excludes</option>
+                        <option value="requires">requires</option>
+                    </select>
+                    <div id="right-space-edit">
+                        <select class="form-control" ng-model="featuresRight[0]" style="width:200px">
+                            <option ng-repeat="feature in features" value="{{feature.title}}">{{feature.title}}</option>
+                            <option ng-repeat="feature in features" value="not {{feature.title}}">Not {{feature.title}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div style="padding: 10px;">
+                <button class="btn btn-default" ng-click="editConstraint()" ng-disabled="middle===''">Save</button>
             </div>
             <div style="padding:10px;width:50%;" class="warning" ng-show="error">
                 <span ng-show="error">Constraint is badly formulated</span>
